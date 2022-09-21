@@ -42,7 +42,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/editTextTextEmailAddress"
+                android:id="@+id/mail1"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="15dp"
@@ -52,7 +52,7 @@
                 android:inputType="textEmailAddress" />
 
             <EditText
-                android:id="@+id/editTextTextPassword3"
+                android:id="@+id/pass1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
@@ -62,10 +62,22 @@
                 android:minHeight="48dp" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login" />
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/btn_navsignup"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="New User? Register now"
+                android:textColor="#3F51B5" />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

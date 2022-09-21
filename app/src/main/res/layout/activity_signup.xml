@@ -62,7 +62,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/editTextTextPersonName3"
+                android:id="@+id/Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -73,7 +73,7 @@
                 android:minHeight="48dp" />
 
             <EditText
-                android:id="@+id/editTextTextEmailAddress3"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -83,7 +83,7 @@
                 android:minHeight="48dp" />
 
             <EditText
-                android:id="@+id/editTextTextPassword"
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -93,7 +93,7 @@
                 android:minHeight="48dp" />
 
             <EditText
-                android:id="@+id/editTextTextPassword2"
+                android:id="@+id/repassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
@@ -103,10 +103,21 @@
                 android:minHeight="48dp" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnsignup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sign Up" />
+
+            <Button
+                android:id="@+id/btn_navlogin"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="Already a User? login"
+                android:textColor="#3F51B5" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
