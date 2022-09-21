@@ -50,12 +50,16 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
-    private void createuser(){
+    private void createuser() {
+        String name1 = name.getText().toString();
         String email = mail.getText().toString();
         String password = pass.getText().toString();
         String repassword = repass.getText().toString();
 
-        if(TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(name1)) {
+            name.setError("Name cannot be Empty");
+            name.requestFocus();
+        }  else if(TextUtils.isEmpty(email)){
             mail.setError("Email cannot be Empty");
             mail.requestFocus();
         } else if (TextUtils.isEmpty(password)) {
@@ -64,7 +68,7 @@ public class SignupActivity extends AppCompatActivity {
         } else if (TextUtils.isEmpty(repassword)){
             repass.setError("Email cannot be Empty");
             repass.requestFocus();
-        }else if (password.equals(repassword)){
+        }else if (!(password.equals(repassword))){
             repass.setError("Passwords don't Match");
             pass.requestFocus();
             repass.requestFocus();
