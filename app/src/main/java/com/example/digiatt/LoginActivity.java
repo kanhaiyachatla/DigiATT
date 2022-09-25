@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         navsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 startActivity(new Intent(getApplicationContext(),SignupActivity.class));
             }
         });
@@ -45,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 loginuser();
+                login.setEnabled(false);
             }
         });
     }
@@ -56,9 +58,11 @@ public class LoginActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(email)){
             mail.setError("Email cannot be Empty");
             mail.requestFocus();
+            login.setEnabled(true);
         } else if (TextUtils.isEmpty(password)) {
             pass.setError("password cannot be Empty");
             pass.requestFocus();
+            login.setEnabled(true);
         }else{
             mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
@@ -66,8 +70,10 @@ public class LoginActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         Toast.makeText(LoginActivity.this, "User Logged in Successfully", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        finish();
                     }else{
-                        Toast.makeText(LoginActivity.this, "User Log in Failed " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        login.setEnabled(true);
                     }
                 }
             });

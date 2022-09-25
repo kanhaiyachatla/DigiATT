@@ -39,6 +39,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 createuser();
+                signup.setEnabled(false);
             }
         });
 
@@ -59,19 +60,24 @@ public class SignupActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(name1)) {
             name.setError("Name cannot be Empty");
             name.requestFocus();
+            signup.setEnabled(true);
         }  else if(TextUtils.isEmpty(email)){
             mail.setError("Email cannot be Empty");
             mail.requestFocus();
+            signup.setEnabled(true);
         } else if (TextUtils.isEmpty(password)) {
             pass.setError("password cannot be Empty");
             pass.requestFocus();
+            signup.setEnabled(true);
         } else if (TextUtils.isEmpty(repassword)){
             repass.setError("Email cannot be Empty");
             repass.requestFocus();
+            signup.setEnabled(true);
         }else if (!(password.equals(repassword))){
             repass.setError("Passwords don't Match");
             pass.requestFocus();
             repass.requestFocus();
+            signup.setEnabled(true);
         }else{
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
@@ -79,8 +85,10 @@ public class SignupActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         Toast.makeText(SignupActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        finish();
                     }else{
                         Toast.makeText(SignupActivity.this, "Registration Failed " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        signup.setEnabled(true);
                     }
                 }
             });
