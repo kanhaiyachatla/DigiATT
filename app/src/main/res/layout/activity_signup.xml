@@ -86,11 +86,18 @@
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:ems="10"
                 android:hint="Enter Password"
                 android:inputType="textPassword"
                 android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="*Passwords should include lowercase letters (a-z) , Uppercase letters (A-Z) and Symbols."
+                android:textSize="10sp" />
 
             <EditText
                 android:id="@+id/repassword"

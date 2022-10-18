@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
+    boolean isBackPressedOnce = false;
     EditText mail,pass;
     Button login,navsignup;
     FirebaseAuth mAuth;
@@ -39,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 startActivity(new Intent(getApplicationContext(),SignupActivity.class));
+                finish();
             }
         });
 
@@ -46,9 +49,26 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 loginuser();
-                login.setEnabled(false);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isBackPressedOnce){
+        super.onBackPressed();
+        return;
+        }
+        Toast.makeText(this, "Press again to Exit.", Toast.LENGTH_SHORT).show();
+        isBackPressedOnce = true;
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                isBackPressedOnce = false;
+            }
+        },2000);
+
     }
 
     private void loginuser(){
@@ -58,21 +78,34 @@ public class LoginActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(email)){
             mail.setError("Email cannot be Empty");
             mail.requestFocus();
-            login.setEnabled(true);
         } else if (TextUtils.isEmpty(password)) {
             pass.setError("password cannot be Empty");
             pass.requestFocus();
-            login.setEnabled(true);
         }else{
+            login.setEnabled(false);
             mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(LoginActivity.this, "User Logged in Successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        finish();
+                        if (mAuth.getCurrentUser().isEmailVerified()){
+                            Toast.makeText(LoginActivity.this, "User Logged in Successfully", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            finish();
+                        }else{
+                            Toast.makeText(LoginActivity.this, "Please verify your Email first", Toast.LENGTH_SHORT).show();
+                            login.setEnabled(true);
+
+                        }
                     }else{
-                        Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        String msg = task.getException().getMessage();
+                        if (msg.contains("no user record")){
+                            Toast.makeText(LoginActivity.this, "E-mail Address does not Exist", Toast.LENGTH_SHORT).show();
+                        }else if (msg.contains("password is invalid")) {
+                            Toast.makeText(LoginActivity.this, "Password is Invalid", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        }
+
                         login.setEnabled(true);
                     }
                 }
