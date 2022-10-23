@@ -110,6 +110,7 @@ public class SignupActivity extends AppCompatActivity {
                                 pass.setText("");
                                 repass.setText("");
                                 signup.setEnabled(true);
+
                                 }else{
                                     Toast.makeText(SignupActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
