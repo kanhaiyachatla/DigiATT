@@ -30,13 +30,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/studentbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="I am a Student" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/teacherbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="I am a Teacher" />
@@ -60,6 +60,15 @@
             android:layout_height="match_parent"
             android:layout_margin="25dp"
             android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/UID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Enter UID"
+                android:inputType="textPersonName"
+                android:minHeight="48dp" />
 
             <EditText
                 android:id="@+id/Name"
